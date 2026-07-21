@@ -59,5 +59,37 @@ public sealed class CameraService : IDisposable
         _capture = null;
     }
 
+    /// <summary>
+    /// Opens the camera, reads a few frames to let exposure/focus settle, and returns
+    /// the last good frame. Used for a quick one-shot capture with no live preview.
+    /// Caller owns the returned Mat and must dispose it.
+    /// </summary>
+    public Mat? CaptureSingleFrame(int cameraIndex = 0, int warmupFrames = 5)
+    {
+        if (!TryOpen(cameraIndex))
+            return null;
+
+        try
+        {
+            using var frame = new Mat();
+            Mat? result = null;
+
+            for (var i = 0; i < warmupFrames; i++)
+            {
+                if (TryReadFrame(frame) && !frame.Empty())
+                {
+                    result?.Dispose();
+                    result = frame.Clone();
+                }
+            }
+
+            return result;
+        }
+        finally
+        {
+            Close();
+        }
+    }
+
     public void Dispose() => Close();
 }

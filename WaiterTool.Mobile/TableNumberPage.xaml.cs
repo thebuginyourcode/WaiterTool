@@ -65,21 +65,6 @@ public partial class TableNumberPage : ContentPage
         Completion.TrySetResult(entry);
     }
 
-    private async void OnSkipClicked(object? sender, EventArgs e)
-    {
-        var entry = new HistoryEntry
-        {
-            WaiterName = _waiterName,
-            TableNumber = string.Empty,
-            Skipped = true,
-            Timestamp = DateTime.Now,
-            PhotoPath = _capturedPhotoPath
-        };
-
-        await Navigation.PopModalAsync();
-        Completion.TrySetResult(entry);
-    }
-
     private async void OnCancelClicked(object? sender, EventArgs e)
     {
         await Navigation.PopModalAsync();

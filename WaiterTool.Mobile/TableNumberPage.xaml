@@ -32,7 +32,6 @@
 
             <HorizontalStackLayout Spacing="12" HorizontalOptions="Center">
                 <Button Text="Cancel" Clicked="OnCancelClicked" BackgroundColor="#6B7280" />
-                <Button Text="Skip" Clicked="OnSkipClicked" BackgroundColor="#D97706" />
                 <Button x:Name="ConfirmButton" Text="Confirm" Clicked="OnConfirmClicked" />
             </HorizontalStackLayout>
 

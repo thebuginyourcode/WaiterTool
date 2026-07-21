@@ -61,14 +61,21 @@
             </Border>
 
             <Border Grid.Row="1" Background="White" CornerRadius="8" Padding="24">
-                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <TextBlock Text="CURRENT TURN" FontSize="14" Foreground="#999" HorizontalAlignment="Center"
-                               FontWeight="Bold" />
-                    <TextBlock x:Name="CurrentWaiterText" Text="—" FontSize="44" FontWeight="Bold"
-                               HorizontalAlignment="Center" Margin="0,4,0,16" />
-                    <Button x:Name="NextWaiterButton" Content="Next Waiter" FontSize="20" Padding="28,12"
-                            Click="NextWaiter_Click" IsEnabled="False" />
-                </StackPanel>
+                <Grid>
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock Text="CURRENT TURN" FontSize="14" Foreground="#999" HorizontalAlignment="Center"
+                                   FontWeight="Bold" />
+                        <TextBlock x:Name="CurrentWaiterText" Text="—" FontSize="44" FontWeight="Bold"
+                                   HorizontalAlignment="Center" Margin="0,4,0,16" />
+                        <Button x:Name="NextWaiterButton" Content="Next Waiter" FontSize="20" Padding="28,12"
+                                Click="NextWaiter_Click" IsEnabled="False" />
+                    </StackPanel>
+
+                    <Button x:Name="SkipButton" Content="Skip" FontSize="14" Padding="16,8"
+                            HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                            Background="#D97706" Foreground="White"
+                            Click="Skip_Click" IsEnabled="False" />
+                </Grid>
             </Border>
         </Grid>
 

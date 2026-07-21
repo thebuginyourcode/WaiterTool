@@ -66,6 +66,7 @@ public partial class MainWindow : Window
     {
         CurrentWaiterText.Text = Queue.Count > 0 ? Queue[0].Name : "—";
         NextWaiterButton.IsEnabled = Queue.Count > 0;
+        SkipButton.IsEnabled = Queue.Count > 0;
     }
 
     private void NextWaiter_Click(object sender, RoutedEventArgs e)
@@ -88,7 +89,7 @@ public partial class MainWindow : Window
             {
                 WaiterName = current.Name,
                 TableNumber = dialog.TableNumber,
-                Skipped = dialog.WasSkipped,
+                Skipped = false,
                 Timestamp = DateTime.Now,
                 PhotoPath = dialog.CapturedPhotoPath
             };
@@ -103,6 +104,44 @@ public partial class MainWindow : Window
             // Cancelled: put the waiter back at the front so their turn isn't lost.
             Queue.Insert(0, current);
         }
+
+        _persistence.SaveQueue(Queue);
+        UpdateCurrentWaiterDisplay();
+    }
+
+    private void Skip_Click(object sender, RoutedEventArgs e)
+    {
+        if (Queue.Count == 0)
+            return;
+
+        var current = Queue[0];
+        Queue.RemoveAt(0);
+
+        string? photoPath = null;
+        using (var camera = new CameraService())
+        using (var frame = camera.CaptureSingleFrame())
+        {
+            if (frame is not null)
+            {
+                photoPath = _persistence.SavePhoto(frame, Guid.NewGuid());
+            }
+        }
+
+        // Cycle: the waiter returns to the back of the list for their next turn.
+        Queue.Add(current);
+
+        var entry = new HistoryEntry
+        {
+            WaiterName = current.Name,
+            TableNumber = string.Empty,
+            Skipped = true,
+            Timestamp = DateTime.Now,
+            PhotoPath = photoPath
+        };
+
+        History.Insert(0, entry);
+        _persistence.SaveHistory(History);
+        ShowLastCapture(entry);
 
         _persistence.SaveQueue(Queue);
         UpdateCurrentWaiterDisplay();

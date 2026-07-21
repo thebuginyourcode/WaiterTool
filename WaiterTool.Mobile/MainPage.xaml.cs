@@ -56,6 +56,7 @@ public partial class MainPage : ContentPage
     {
         CurrentWaiterLabel.Text = Queue.Count > 0 ? Queue[0].Name : "—";
         NextWaiterButton.IsEnabled = Queue.Count > 0;
+        SkipButton.IsEnabled = Queue.Count > 0;
     }
 
     private async void OnNextWaiterClicked(object? sender, EventArgs e)
@@ -85,6 +86,41 @@ public partial class MainPage : ContentPage
             // Cancelled: put the waiter back at the front so their turn isn't lost.
             Queue.Insert(0, current);
         }
+
+        _persistence.SaveQueue(Queue);
+        UpdateCurrentWaiterDisplay();
+    }
+
+    private async void OnSkipClicked(object? sender, EventArgs e)
+    {
+        if (Queue.Count == 0)
+            return;
+
+        var current = Queue[0];
+        Queue.RemoveAt(0);
+
+        string? photoPath = null;
+        var tempPath = await _camera.CapturePhotoAsync();
+        if (tempPath is not null)
+        {
+            photoPath = _persistence.SavePhoto(tempPath, Guid.NewGuid());
+        }
+
+        // Cycle: the waiter returns to the back of the list for their next turn.
+        Queue.Add(current);
+
+        var entry = new HistoryEntry
+        {
+            WaiterName = current.Name,
+            TableNumber = string.Empty,
+            Skipped = true,
+            Timestamp = DateTime.Now,
+            PhotoPath = photoPath
+        };
+
+        History.Insert(0, entry);
+        _persistence.SaveHistory(History);
+        ShowLastCapture(entry);
 
         _persistence.SaveQueue(Queue);
         UpdateCurrentWaiterDisplay();
