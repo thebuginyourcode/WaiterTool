@@ -13,6 +13,9 @@
          instead of being bundled into it, so the exe fails to start if those files aren't
          shipped alongside it. -->
     <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+    <!-- Precompiles to native code at publish time instead of JIT-compiling on every cold
+         start, which is the main lever for faster launch on a self-contained app. -->
+    <PublishReadyToRun>true</PublishReadyToRun>
   </PropertyGroup>
 
   <ItemGroup>
