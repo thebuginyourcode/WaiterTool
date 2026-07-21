@@ -15,6 +15,13 @@
     <ApplicationVersion>1</ApplicationVersion>
 
     <SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net10.0-android'">21.0</SupportedOSPlatformVersion>
+
+    <!-- Debug builds default to Fast Deployment, which expects assemblies to be
+         pushed to the device separately by an IDE's deploy step instead of being
+         embedded in the APK. A plain `adb install` (or sideloading) then crashes
+         on launch with "No assemblies found ... Exiting". Since this APK is meant
+         to be installed standalone, embed the assemblies like a Release build. -->
+    <EmbedAssembliesIntoApk Condition="'$(Configuration)' == 'Debug'">true</EmbedAssembliesIntoApk>
   </PropertyGroup>
 
   <ItemGroup>
