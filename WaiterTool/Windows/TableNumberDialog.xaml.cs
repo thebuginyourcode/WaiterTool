@@ -13,7 +13,7 @@ namespace WaiterTool.Windows;
 /// Prompts for a table number while showing a live webcam preview, and
 /// captures the current frame as the confirmation photo.
 /// </summary>
-public partial class TableNumberDialog : Window
+public partial class TableNumberDialog : System.Windows.Window
 {
     private static readonly Regex DigitsOnly = new("^[0-9]+$");
 
