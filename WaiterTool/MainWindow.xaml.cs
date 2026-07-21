@@ -88,6 +88,7 @@ public partial class MainWindow : Window
             {
                 WaiterName = current.Name,
                 TableNumber = dialog.TableNumber,
+                Skipped = dialog.WasSkipped,
                 Timestamp = DateTime.Now,
                 PhotoPath = dialog.CapturedPhotoPath
             };
@@ -127,6 +128,6 @@ public partial class MainWindow : Window
             LastCaptureImage.Source = null;
         }
 
-        LastCaptureInfoText.Text = $"{entry.WaiterName} — Table {entry.TableNumber} — {entry.Timestamp:t}";
+        LastCaptureInfoText.Text = $"{entry.WaiterName} — {entry.TableLabel} — {entry.Timestamp:t}";
     }
 }

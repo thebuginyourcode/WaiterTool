@@ -25,6 +25,7 @@ public partial class TableNumberDialog : System.Windows.Window
 
     public string TableNumber { get; private set; } = string.Empty;
     public string? CapturedPhotoPath { get; private set; }
+    public bool WasSkipped { get; private set; }
 
     public TableNumberDialog(string waiterName)
     {
@@ -85,11 +86,16 @@ public partial class TableNumberDialog : System.Windows.Window
         }
 
         TableNumber = tableNumber;
+        CapturePhotoIfAvailable();
 
-        if (_camera.IsOpen && !_latestFrame.Empty())
-        {
-            CapturedPhotoPath = _persistence.SavePhoto(_latestFrame, _entryId);
-        }
+        DialogResult = true;
+        Close();
+    }
+
+    private void Skip_Click(object sender, RoutedEventArgs e)
+    {
+        WasSkipped = true;
+        CapturePhotoIfAvailable();
 
         DialogResult = true;
         Close();
@@ -99,6 +105,14 @@ public partial class TableNumberDialog : System.Windows.Window
     {
         DialogResult = false;
         Close();
+    }
+
+    private void CapturePhotoIfAvailable()
+    {
+        if (_camera.IsOpen && !_latestFrame.Empty())
+        {
+            CapturedPhotoPath = _persistence.SavePhoto(_latestFrame, _entryId);
+        }
     }
 
     private void Window_Closed(object? sender, EventArgs e)

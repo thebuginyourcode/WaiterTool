@@ -94,7 +94,7 @@
 
                                 <StackPanel Grid.Column="1" Margin="10,0,0,0">
                                     <TextBlock Text="{Binding WaiterName}" FontWeight="Bold" FontSize="14" />
-                                    <TextBlock Text="{Binding TableNumber, StringFormat='Table {0}'}" FontSize="12"
+                                    <TextBlock Text="{Binding TableLabel}" FontSize="12"
                                                Foreground="#666" />
                                     <TextBlock Text="{Binding Timestamp, StringFormat='{}{0:g}'}" FontSize="11"
                                                Foreground="#999" />
