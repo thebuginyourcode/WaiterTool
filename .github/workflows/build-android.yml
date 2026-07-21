@@ -57,7 +57,7 @@ jobs:
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
           script: |
-            APK=$(find apk -name "*.apk" | head -n 1)
+            APK=$(find "$GITHUB_WORKSPACE/apk" -name "*.apk" | head -n 1)
             echo "Installing $APK"
             adb install -r "$APK"
             adb logcat -c
