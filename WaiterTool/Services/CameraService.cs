@@ -12,7 +12,7 @@ public sealed class CameraService : IDisposable
 {
     private VideoCapture? _capture;
 
-    public bool IsOpen => _capture is { IsOpened: true };
+    public bool IsOpen => _capture is not null && _capture.IsOpened();
 
     public bool TryOpen(int cameraIndex = 0)
     {
