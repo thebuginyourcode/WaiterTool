@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WaiterTool.Mobile.TableNumberPage"
+             Title="Table Number"
+             BackgroundColor="{StaticResource PageBackgroundColor}">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="24" Spacing="20" HorizontalOptions="Center" MaximumWidthRequest="480">
+
+            <Border x:Name="PhotoPreviewBorder" WidthRequest="220" HeightRequest="160"
+                    StrokeShape="RoundRectangle 10" Stroke="#DDDDDD" BackgroundColor="Black"
+                    HorizontalOptions="Center" IsVisible="False">
+                <Image x:Name="PhotoPreviewImage" Aspect="AspectFit" />
+            </Border>
+
+            <Label x:Name="HeaderLabel" FontSize="26" FontAttributes="Bold" HorizontalOptions="Center"
+                   HorizontalTextAlignment="Center" TextColor="{StaticResource PrimaryTextColor}" />
+
+            <Label Text="Take a photo to confirm this turn." FontSize="14"
+                   TextColor="{StaticResource MutedTextColor}" HorizontalOptions="Center"
+                   HorizontalTextAlignment="Center" />
+
+            <Button x:Name="CapturePhotoButton" Text="Open Camera" Clicked="OnCapturePhotoClicked"
+                    HorizontalOptions="Center" />
+
+            <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+                <Label Text="Table #" FontSize="18" VerticalOptions="Center"
+                       TextColor="{StaticResource PrimaryTextColor}" />
+                <Entry x:Name="TableNumberEntry" Keyboard="Numeric" WidthRequest="120" FontSize="18" />
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout Spacing="12" HorizontalOptions="Center">
+                <Button Text="Cancel" Clicked="OnCancelClicked" BackgroundColor="#6B7280" />
+                <Button Text="Skip" Clicked="OnSkipClicked" BackgroundColor="#D97706" />
+                <Button x:Name="ConfirmButton" Text="Confirm" Clicked="OnConfirmClicked" />
+            </HorizontalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

@@ -6,6 +6,9 @@ enter a table number and take a webcam photo to confirm the assignment.
 The waiter then cycles back to the end of the queue, and the photo/table/time
 is logged in the history panel.
 
+There's also an Android port in `WaiterTool.Mobile/` — see
+[WaiterTool.Mobile/README.md](WaiterTool.Mobile/README.md).
+
 ## Requirements
 
 - Windows 10/11
