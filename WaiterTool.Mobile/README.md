@@ -34,10 +34,12 @@ unknown sources" if prompted), or use `adb install <path-to-signed-apk>`.
 
 ## How it differs from the desktop version
 
-- **Layout:** a single responsive page instead of three fixed panels. Cards
-  (Waiters, Current Turn / Last Capture, History) wrap to one column on a
-  narrow phone screen and sit side-by-side on a wider tablet screen,
-  reflowing automatically as the window/orientation changes.
+- **Layout:** three tabs (Current / Waiters / History) instead of three
+  fixed side-by-side panels. Each tab is its own full-height screen — the
+  waiter list and history list fill all available vertical space and
+  scroll internally, so you're not scrolling the whole page to reach
+  content. Content is centered with a max width on tablets so it doesn't
+  stretch edge-to-edge into an awkwardly wide single column.
 - **Camera:** mobile has no way to embed a continuous live preview without
   an extra native camera plugin, so tapping **Open Camera** launches the
   device's own camera app; the photo you take comes back into the app. This

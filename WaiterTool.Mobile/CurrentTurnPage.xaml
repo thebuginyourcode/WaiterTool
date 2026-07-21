@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WaiterTool.Mobile.CurrentTurnPage"
+             Title="Current"
+             BackgroundColor="{StaticResource PageBackgroundColor}">
+
+    <Grid Padding="20" RowDefinitions="Auto,*" RowSpacing="16"
+          MaximumWidthRequest="{OnIdiom Phone=100000, Tablet=700, Default=700}" HorizontalOptions="Center">
+
+        <!-- Last capture summary -->
+        <Border Grid.Row="0" Padding="14" StrokeShape="RoundRectangle 12" Stroke="Transparent"
+                BackgroundColor="{StaticResource CardBackgroundColor}">
+            <Grid ColumnDefinitions="72,*" ColumnSpacing="12" MinimumHeightRequest="72">
+                <Border x:Name="LastCaptureImageBorder" WidthRequest="72" HeightRequest="72"
+                        StrokeShape="RoundRectangle 8" Stroke="#DDDDDD" IsVisible="False">
+                    <Image x:Name="LastCaptureImage" Aspect="AspectFill" />
+                </Border>
+                <Label x:Name="NoCaptureLabel" Grid.Column="0" Grid.ColumnSpan="2"
+                       Text="No photo captured yet" TextColor="{StaticResource MutedTextColor}"
+                       VerticalOptions="Center" />
+                <Label x:Name="LastCaptureInfoLabel" Grid.Column="1" VerticalOptions="Center"
+                       FontSize="15" IsVisible="False" TextColor="{StaticResource PrimaryTextColor}" />
+            </Grid>
+        </Border>
+
+        <!-- Current turn + Next Waiter / Skip -->
+        <Grid Grid.Row="1">
+            <VerticalStackLayout Spacing="12" HorizontalOptions="Center" VerticalOptions="Center">
+                <Label Text="CURRENT TURN" FontSize="14" TextColor="{StaticResource MutedTextColor}"
+                       FontAttributes="Bold" HorizontalOptions="Center" />
+                <Label x:Name="CurrentWaiterLabel" Text="—" FontSize="44" FontAttributes="Bold"
+                       HorizontalOptions="Center" TextColor="{StaticResource PrimaryTextColor}" />
+                <Button x:Name="NextWaiterButton" Text="Next Waiter" FontSize="20" Padding="30,16"
+                        Clicked="OnNextWaiterClicked" IsEnabled="False" />
+            </VerticalStackLayout>
+
+            <Button x:Name="SkipButton" Text="Skip" FontSize="14" Padding="16,8"
+                    HorizontalOptions="End" VerticalOptions="End"
+                    BackgroundColor="#D97706" Clicked="OnSkipClicked" IsEnabled="False" />
+        </Grid>
+    </Grid>
+</ContentPage>

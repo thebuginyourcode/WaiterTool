@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:WaiterTool.Mobile.Models"
+             x:Class="WaiterTool.Mobile.HistoryPage"
+             Title="History"
+             BackgroundColor="{StaticResource PageBackgroundColor}">
+
+    <Grid Padding="20" RowDefinitions="Auto,*" RowSpacing="12"
+          MaximumWidthRequest="{OnIdiom Phone=100000, Tablet=700, Default=700}" HorizontalOptions="Center">
+
+        <Label Text="History" FontSize="26" FontAttributes="Bold" TextColor="{StaticResource PrimaryTextColor}" />
+
+        <CollectionView Grid.Row="1" x:Name="HistoryCollectionView">
+            <CollectionView.EmptyView>
+                <Label Text="No history yet." TextColor="{StaticResource MutedTextColor}"
+                       HorizontalOptions="Center" VerticalOptions="Center" FontSize="16" />
+            </CollectionView.EmptyView>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:HistoryEntry">
+                    <Grid ColumnDefinitions="52,*" Padding="0,10" ColumnSpacing="12">
+                        <Border WidthRequest="52" HeightRequest="52" StrokeShape="RoundRectangle 8"
+                                Stroke="#EEEEEE">
+                            <Image Source="{Binding PhotoPath}" Aspect="AspectFill" />
+                        </Border>
+                        <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
+                            <Label Text="{Binding WaiterName}" FontAttributes="Bold" FontSize="16"
+                                   TextColor="{StaticResource PrimaryTextColor}" />
+                            <Label Text="{Binding TableLabel}" FontSize="13"
+                                   TextColor="{StaticResource MutedTextColor}" />
+                            <Label Text="{Binding Timestamp, StringFormat='{0:g}'}" FontSize="12"
+                                   TextColor="{StaticResource MutedTextColor}" />
+                        </VerticalStackLayout>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>

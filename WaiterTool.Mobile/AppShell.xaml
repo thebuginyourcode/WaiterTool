@@ -5,5 +5,9 @@
        x:Class="WaiterTool.Mobile.AppShell"
        Shell.FlyoutBehavior="Disabled"
        Shell.NavBarIsVisible="False">
-    <ShellContent ContentTemplate="{DataTemplate local:MainPage}" Route="MainPage" />
+    <TabBar>
+        <ShellContent Title="Current" ContentTemplate="{DataTemplate local:CurrentTurnPage}" Route="CurrentTurnPage" />
+        <ShellContent Title="Waiters" ContentTemplate="{DataTemplate local:WaitersPage}" Route="WaitersPage" />
+        <ShellContent Title="History" ContentTemplate="{DataTemplate local:HistoryPage}" Route="HistoryPage" />
+    </TabBar>
 </Shell>
