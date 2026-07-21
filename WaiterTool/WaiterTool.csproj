@@ -8,6 +8,11 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>WaiterTool</RootNamespace>
     <AssemblyName>WaiterTool</AssemblyName>
+    <!-- Without this, WPF's native renderer DLLs (PresentationNative_*.dll, wpfgfx_*.dll, etc.)
+         and OpenCvSharp's native DLLs are left as loose files next to the single-file exe
+         instead of being bundled into it, so the exe fails to start if those files aren't
+         shipped alongside it. -->
+    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
   </PropertyGroup>
 
   <ItemGroup>

@@ -27,4 +27,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: WaiterTool-win-x64
-          path: publish/*.exe
+          path: publish/
