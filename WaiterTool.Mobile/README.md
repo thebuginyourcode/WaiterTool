@@ -6,7 +6,8 @@ adapted for phone and tablet screens.
 
 ## Requirements
 
-- [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
+- [.NET 10 SDK](https://dotnet.microsoft.com/download/dotnet/10.0) (net8.0-android
+  is no longer a supported workload target as of current .NET tooling)
 - MAUI Android workload: `dotnet workload install maui-android`
 - An Android device or emulator to install the APK on
 
@@ -15,11 +16,11 @@ adapted for phone and tablet screens.
 ```
 dotnet workload install maui-android
 dotnet restore WaiterTool.Mobile/WaiterTool.Mobile.csproj
-dotnet build WaiterTool.Mobile/WaiterTool.Mobile.csproj -f net8.0-android -c Debug
+dotnet build WaiterTool.Mobile/WaiterTool.Mobile.csproj -f net10.0-android -c Debug
 ```
 
 The installable (debug-signed) APK lands in
-`WaiterTool.Mobile/bin/Debug/net8.0-android/`. Copy it to a device and open
+`WaiterTool.Mobile/bin/Debug/net10.0-android/`. Copy it to a device and open
 it (allow "install from unknown sources" if prompted), or use
 `adb install <path-to-apk>`.
 
@@ -39,8 +40,10 @@ it (allow "install from unknown sources" if prompted), or use
   device's own camera app; the photo you take comes back into the app. This
   replaces the desktop's embedded live preview, but the end result (a photo
   captured and logged per turn) is the same.
-- **Skip:** same as desktop — logs a photo + "Skipped" entry and cycles the
-  waiter to the back of the queue without a table number.
+- **Skip:** a standalone button in the bottom-right of the Current Turn /
+  Last Capture card (not inside the table-number popup) — logs a photo +
+  "Skipped" entry and cycles the waiter to the back of the queue without a
+  table number.
 
 ## Data storage
 
