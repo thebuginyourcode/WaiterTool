@@ -57,9 +57,7 @@ jobs:
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
           script: |
-            APK=$(find "$GITHUB_WORKSPACE/apk" -name "*.apk" | head -n 1)
-            echo "Installing $APK"
-            adb install -r "$APK"
+            adb install -r "$(find "$GITHUB_WORKSPACE/apk" -name "*.apk" | head -n 1)"
             adb logcat -c
             adb shell monkey -p com.waitertool.mobile -c android.intent.category.LAUNCHER 1
             sleep 10
