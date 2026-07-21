@@ -19,10 +19,13 @@ dotnet restore WaiterTool.Mobile/WaiterTool.Mobile.csproj
 dotnet build WaiterTool.Mobile/WaiterTool.Mobile.csproj -f net10.0-android -c Debug
 ```
 
-The installable (debug-signed) APK lands in
-`WaiterTool.Mobile/bin/Debug/net10.0-android/`. Copy it to a device and open
-it (allow "install from unknown sources" if prompted), or use
-`adb install <path-to-apk>`.
+The build produces multiple `.apk` files in
+`WaiterTool.Mobile/bin/Debug/net10.0-android/` — **only the one ending in
+`-Signed.apk` is installable.** The other(s) are unsigned intermediates
+that Android's installer will reject with
+`INSTALL_PARSE_FAILED_NO_CERTIFICATES` if you try to install them. Copy
+the `-Signed.apk` file to a device and open it (allow "install from
+unknown sources" if prompted), or use `adb install <path-to-signed-apk>`.
 
 > **Note:** this was written without a way to run Android tooling, an
 > emulator, or a physical device in the environment it was built in, so it
