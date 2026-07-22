@@ -11,8 +11,10 @@
             <Color x:Key="AccentColor">#2563EB</Color>
 
             <Style TargetType="Button">
-                <Setter Property="BackgroundColor" Value="{StaticResource AccentColor}" />
-                <Setter Property="TextColor" Value="White" />
+                <Setter Property="BackgroundColor" Value="White" />
+                <Setter Property="TextColor" Value="{StaticResource AccentColor}" />
+                <Setter Property="BorderColor" Value="{StaticResource AccentColor}" />
+                <Setter Property="BorderWidth" Value="1.5" />
                 <Setter Property="CornerRadius" Value="8" />
                 <Setter Property="Padding" Value="16,10" />
                 <Setter Property="FontSize" Value="16" />

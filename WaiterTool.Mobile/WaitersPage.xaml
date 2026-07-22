@@ -31,6 +31,7 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
 
-        <Button Grid.Row="3" Text="Remove Selected" Clicked="OnRemoveWaiterClicked" BackgroundColor="#DC2626" />
+        <Button Grid.Row="3" Text="Remove Selected" Clicked="OnRemoveWaiterClicked"
+                TextColor="#DC2626" BorderColor="#DC2626" />
     </Grid>
 </ContentPage>

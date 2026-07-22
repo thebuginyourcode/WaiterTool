@@ -9,5 +9,6 @@
         <ShellContent Title="Current" ContentTemplate="{DataTemplate local:CurrentTurnPage}" Route="CurrentTurnPage" />
         <ShellContent Title="Waiters" ContentTemplate="{DataTemplate local:WaitersPage}" Route="WaitersPage" />
         <ShellContent Title="History" ContentTemplate="{DataTemplate local:HistoryPage}" Route="HistoryPage" />
+        <ShellContent Title="Settings" ContentTemplate="{DataTemplate local:SettingsPage}" Route="SettingsPage" />
     </TabBar>
 </Shell>

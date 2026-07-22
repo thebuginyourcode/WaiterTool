@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WaiterTool.Mobile.SettingsPage"
+             Title="Settings"
+             BackgroundColor="{StaticResource PageBackgroundColor}">
+
+    <Grid Padding="20" RowDefinitions="Auto,Auto,Auto,Auto" RowSpacing="14" VerticalOptions="Start"
+          MaximumWidthRequest="{OnIdiom Phone=100000, Tablet=700, Default=700}" HorizontalOptions="Center">
+
+        <Label Text="Settings" FontSize="26" FontAttributes="Bold" TextColor="{StaticResource PrimaryTextColor}" />
+
+        <Label Grid.Row="1"
+               Text="Every night at midnight, the day's History is exported to a text log and cleared. Choose where that log is saved:"
+               FontSize="14" TextColor="{StaticResource MutedTextColor}" />
+
+        <Label Grid.Row="2" x:Name="LogFolderLabel" FontSize="15" TextColor="{StaticResource PrimaryTextColor}" />
+
+        <Button Grid.Row="3" Text="Choose Folder" Clicked="OnChooseFolderClicked" HorizontalOptions="Start" />
+    </Grid>
+</ContentPage>

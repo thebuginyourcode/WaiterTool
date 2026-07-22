@@ -37,7 +37,7 @@
 
             <Button x:Name="SkipButton" Text="Skip" FontSize="14" Padding="16,8"
                     HorizontalOptions="End" VerticalOptions="End"
-                    BackgroundColor="#D97706" Clicked="OnSkipClicked" IsEnabled="False" />
+                    TextColor="#D97706" BorderColor="#D97706" Clicked="OnSkipClicked" IsEnabled="False" />
         </Grid>
     </Grid>
 </ContentPage>

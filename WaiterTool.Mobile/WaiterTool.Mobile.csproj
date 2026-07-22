@@ -29,4 +29,9 @@
     <MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#1F2937" BaseSize="128,128" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Maui" Version="14.2.2" />
+    <PackageReference Include="CommunityToolkit.Maui.Camera" Version="6.1.0" />
+  </ItemGroup>
+
 </Project>

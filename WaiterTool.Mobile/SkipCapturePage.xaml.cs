@@ -7,7 +7,7 @@ using WaiterTool.Mobile.Services;
 
 namespace WaiterTool.Mobile;
 
-public partial class TableNumberPage : ContentPage
+public partial class SkipCapturePage : ContentPage
 {
     private readonly string _waiterName;
     private readonly PersistenceService _persistence;
@@ -18,14 +18,14 @@ public partial class TableNumberPage : ContentPage
 
     public TaskCompletionSource<HistoryEntry?> Completion { get; } = new();
 
-    public TableNumberPage(string waiterName, PersistenceService persistence)
+    public SkipCapturePage(string waiterName, PersistenceService persistence)
     {
         InitializeComponent();
 
         _waiterName = waiterName;
         _persistence = persistence;
 
-        HeaderLabel.Text = $"{waiterName}'s turn";
+        HeaderLabel.Text = $"Skip {waiterName}'s turn";
     }
 
     protected override async void OnAppearing()
@@ -94,18 +94,11 @@ public partial class TableNumberPage : ContentPage
 
     private async void OnConfirmClicked(object? sender, EventArgs e)
     {
-        var tableNumber = TableNumberEntry.Text?.Trim();
-        if (string.IsNullOrWhiteSpace(tableNumber))
-        {
-            await DisplayAlert("Table Number Required", "Please enter a table number.", "OK");
-            return;
-        }
-
         var entry = new HistoryEntry
         {
             WaiterName = _waiterName,
-            TableNumber = tableNumber,
-            Skipped = false,
+            TableNumber = string.Empty,
+            Skipped = true,
             Timestamp = DateTime.Now,
             PhotoPath = _capturedPhotoPath
         };
