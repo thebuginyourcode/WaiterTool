@@ -8,6 +8,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Checkout
         uses: actions/checkout@v7
@@ -31,6 +33,19 @@ jobs:
         with:
           name: WaiterTool-android-apk
           path: WaiterTool.Mobile/bin/Debug/net10.0-android/*-Signed.apk
+
+      - name: Publish GitHub Release
+        if: github.event_name == 'workflow_dispatch'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: mobile-run-${{ github.run_number }}
+          name: Waiter Tool Mobile (build ${{ github.run_number }})
+          body: |
+            Automated Android APK build from commit ${{ github.sha }}.
+            Install the attached `-Signed.apk` on your device (allow "install from unknown sources" if prompted).
+          files: WaiterTool.Mobile/bin/Debug/net10.0-android/*-Signed.apk
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   smoke-test:
     needs: build
