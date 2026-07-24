@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:WaiterTool.Mobile.Models"
+             x:Class="WaiterTool.Mobile.MainPage"
+             Title="Waiter Tool"
+             BackgroundColor="{StaticResource PageBackgroundColor}">
+
+    <ScrollView>
+        <FlexLayout Direction="Row" Wrap="Wrap" AlignItems="Start" JustifyContent="Start" Padding="12">
+
+            <!-- Waiters card -->
+            <Border FlexLayout.Basis="320" FlexLayout.Grow="1" Margin="8" Padding="16"
+                    StrokeShape="RoundRectangle 12" Stroke="Transparent"
+                    BackgroundColor="{StaticResource CardBackgroundColor}">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="Waiters" FontSize="20" FontAttributes="Bold"
+                           TextColor="{StaticResource PrimaryTextColor}" />
+
+                    <HorizontalStackLayout Spacing="8">
+                        <Entry x:Name="NewWaiterEntry" Placeholder="Waiter name" WidthRequest="180"
+                               Completed="OnAddWaiterClicked" />
+                        <Button Text="Add" Clicked="OnAddWaiterClicked" />
+                    </HorizontalStackLayout>
+
+                    <CollectionView x:Name="QueueCollectionView" HeightRequest="220" SelectionMode="Single">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="models:Waiter">
+                                <Grid Padding="8,6">
+                                    <Label Text="{Binding Name}" FontSize="16" VerticalOptions="Center"
+                                           TextColor="{StaticResource PrimaryTextColor}" />
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+                    <Button Text="Remove Selected" Clicked="OnRemoveWaiterClicked"
+                            TextColor="#DC2626" BorderColor="#DC2626" />
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Current turn + last capture card -->
+            <Border FlexLayout.Basis="320" FlexLayout.Grow="1" Margin="8" Padding="16"
+                    StrokeShape="RoundRectangle 12" Stroke="Transparent"
+                    BackgroundColor="{StaticResource CardBackgroundColor}">
+                <Grid>
+                    <VerticalStackLayout Spacing="16">
+                        <Label Text="Last Capture" FontSize="16" FontAttributes="Bold"
+                               TextColor="{StaticResource PrimaryTextColor}" />
+
+                        <Grid ColumnDefinitions="88,*" ColumnSpacing="12" MinimumHeightRequest="88">
+                            <Border x:Name="LastCaptureImageBorder" WidthRequest="88" HeightRequest="88"
+                                    StrokeShape="RoundRectangle 8" Stroke="#DDDDDD" IsVisible="False">
+                                <Image x:Name="LastCaptureImage" Aspect="AspectFill" />
+                            </Border>
+                            <Label x:Name="NoCaptureLabel" Grid.Column="0" Grid.ColumnSpan="2"
+                                   Text="No photo captured yet" TextColor="{StaticResource MutedTextColor}"
+                                   VerticalOptions="Center" />
+                            <Label x:Name="LastCaptureInfoLabel" Grid.Column="1" VerticalOptions="Center"
+                                   FontSize="15" IsVisible="False" TextColor="{StaticResource PrimaryTextColor}" />
+                        </Grid>
+
+                        <BoxView HeightRequest="1" Color="#EEEEEE" />
+
+                        <VerticalStackLayout Spacing="8" HorizontalOptions="Center">
+                            <Label Text="CURRENT TURN" FontSize="13" TextColor="{StaticResource MutedTextColor}"
+                                   FontAttributes="Bold" HorizontalOptions="Center" />
+                            <Label x:Name="CurrentWaiterLabel" Text="—" FontSize="36" FontAttributes="Bold"
+                                   HorizontalOptions="Center" TextColor="{StaticResource PrimaryTextColor}" />
+                            <Button x:Name="NextWaiterButton" Text="Next Waiter" FontSize="18"
+                                    Clicked="OnNextWaiterClicked" IsEnabled="False" />
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+
+                    <Button x:Name="SkipButton" Text="Skip" FontSize="14" Padding="14,8"
+                            HorizontalOptions="End" VerticalOptions="End"
+                            TextColor="#D97706" BorderColor="#D97706" Clicked="OnSkipClicked" IsEnabled="False" />
+                </Grid>
+            </Border>
+
+            <!-- History card -->
+            <Border FlexLayout.Basis="320" FlexLayout.Grow="1" Margin="8" Padding="16"
+                    StrokeShape="RoundRectangle 12" Stroke="Transparent"
+                    BackgroundColor="{StaticResource CardBackgroundColor}">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="History" FontSize="20" FontAttributes="Bold"
+                           TextColor="{StaticResource PrimaryTextColor}" />
+
+                    <CollectionView x:Name="HistoryCollectionView" HeightRequest="360">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="models:HistoryEntry">
+                                <Grid ColumnDefinitions="44,*" Padding="0,6" ColumnSpacing="10">
+                                    <Border WidthRequest="44" HeightRequest="44" StrokeShape="RoundRectangle 6"
+                                            Stroke="#EEEEEE">
+                                        <Image Source="{Binding PhotoPath}" Aspect="AspectFill" />
+                                    </Border>
+                                    <VerticalStackLayout Grid.Column="1">
+                                        <Label Text="{Binding WaiterName}" FontAttributes="Bold" FontSize="14"
+                                               TextColor="{StaticResource PrimaryTextColor}" />
+                                        <Label Text="{Binding TableLabel}" FontSize="12"
+                                               TextColor="{StaticResource MutedTextColor}" />
+                                        <Label Text="{Binding Timestamp, StringFormat='{0:g}'}" FontSize="11"
+                                               TextColor="{StaticResource MutedTextColor}" />
+                                    </VerticalStackLayout>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </Border>
+
+        </FlexLayout>
+    </ScrollView>
+</ContentPage>
