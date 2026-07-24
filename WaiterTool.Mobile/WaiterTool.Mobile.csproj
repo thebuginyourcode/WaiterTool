@@ -32,6 +32,11 @@
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Maui" Version="14.2.2" />
     <PackageReference Include="CommunityToolkit.Maui.Camera" Version="6.1.0" />
+    <!-- The installed maui-android workload's implicit Microsoft.Maui.Controls
+         reference (10.0.20) is older than what CommunityToolkit.Maui 14.2.2
+         requires (>= 10.0.60). Override it explicitly; it's a published
+         version, just not the one this workload pins by default. -->
+    <PackageReference Include="Microsoft.Maui.Controls" Version="10.0.60" />
   </ItemGroup>
 
 </Project>
